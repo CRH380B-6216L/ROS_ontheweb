@@ -20,12 +20,6 @@ function get_profile($column = "")
             $result['fullName'] = $row['fullName'];
             $result['password'] = $row['password'];
             $result['email'] = $row['email'];
-            $result['gender'] = $row['gender'];
-            $result['phone'] = $row['phone'];
-            $result['typeIdCard'] = $row['typeIdCard'];
-            $result['numberIdCard'] = $row['numberIdCard'];
-            $result['dateOfBirth'] = $row['dateOfBirth'];
-            $result['dateJoined'] = $row['dateJoined'];
             return $result;
         }
     }

@@ -9,7 +9,7 @@
     setcookie("user","",-2592000);
     setcookie("auth","",-2592000);                       
     setcookie("uid","",-2592000);
-    echo '<p>您已成功登出！如果浏览器没有自动跳转，请<a href="index.php">点击这里</a></p>'
+    echo '<p>Logged out sueecssfully! <a href="index.php">Click here</a> if not directed automatically</p>'
     . '<script Language="JavaScript">window.location.href("index.php");</script>';
     die;
     /* 

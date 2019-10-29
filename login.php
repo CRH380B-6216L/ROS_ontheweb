@@ -8,7 +8,7 @@
     $email = $password = "";
     $errMessage = "　";
     $previous = $_SERVER["HTTP_REFERER"];
-    if (isset($_GET['redirect'])) $errMessage = "您需要先登录才能继续访问该页面！";    
+    if (isset($_GET['redirect'])) $errMessage = "You need to login before access the page!";    
     if (isset($_GET['previous'])) $previous = "http://".$_SERVER['HTTP_HOST'].$_GET['previous'];
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") 
@@ -16,7 +16,7 @@
 	$validate = true;
         if (empty($_POST["password"])) 
         {
-            $errMessage = "请输入密码！";
+            $errMessage = "Please enter password!";
             $validate = false;
         } else {
             $password = md5($_POST["password"]);
@@ -24,7 +24,7 @@
 
         if (empty($_POST["email"])) 
         {
-            $errMessage = "请输入邮箱！";
+            $errMessage = "Please enter your email!";
             $validate = false;
         }
         else 
@@ -32,7 +32,7 @@
             $email = test_input($_POST["email"]);
             if (!preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/",$email)) 
             {
-                $errMessage = "邮箱格式无效！";
+                $errMessage = "Email invalid!";
                 $email = "";
 		$validate = false;
             }
@@ -55,7 +55,7 @@
                     $found = true;
                     if ($row['password'] != $password)
                     {
-                        $errMessage = "密码错误！";
+                        $errMessage = "Password Incorrect";
                     }
                     else
                     {
@@ -66,7 +66,7 @@
                         setcookie("user",$email,$length);                                               
                         setcookie("uid",$row['id'],$length);
                         setcookie("auth",true);
-                        echo '<p>您已成功登录！如果浏览器没有自动跳转，请<a href="' . $previous . '">点击这里</a></p>'
+                        echo '<p>Logged in successfully! <a href="' . $previous . '">Click here</a> if not directed automatically</p>'
                         . '<script Language="JavaScript">window.location.href("' . $previous . '");</script>';
                         die;
                     }
@@ -74,7 +74,7 @@
 				
 		if (!$found)
 		{
-		    $errMessage = "用户不存在！";
+		    $errMessage = "User does not exist!";
 		}					
 	    }
 	    catch(PDOException $e)
@@ -93,18 +93,17 @@
     ?>
 
     <p>　</p>
-    <h1>登录 Console PHP</h1>
+    <h1>Login ROS on the web</h1>
     <p> </p>
-    <p>PHP 是世界上最好的编程语言！</p>
     <p style="color:red"><?php echo $errMessage;?></p>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["REQUEST_URI"]);?>">
-        <p>邮箱：<input style="width:180px" type="text" name="email" maxlength="64" value="<?php echo $email;?>"/></p>
-        <p>密码：<input style="width:180px" type="password" name="password" maxlength="32" /></p>
-        <p><input  type="checkbox" name="remember" value="yes"/>记住我的登录状态（持续30天）</p>
-        <input type="submit" name="login" value="登录" />
+        <p>Email: <input style="width:180px" type="text" name="email" maxlength="64" value="<?php echo $email;?>"/></p>
+        <p>Password: <input style="width:180px" type="password" name="password" maxlength="32" /></p>
+        <p><input  type="checkbox" name="remember" value="yes"/>Remember me (for 30 days)</p>
+        <input type="submit" name="login" value="Log in" />
     </form>
     <p>　</p>
-    <a href="register.php">注册新账户</a><br /><br />
-    <a href="password.php">忘了密码？</a>
+    <a href="register.php">Create account</a><br /><br />
+    <a href="password.php">Forgot password?</a>
 </body>
 </html>
